@@ -4,6 +4,9 @@ import mockit.Mock;
 import mockit.MockUp;
 import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+
 public class FunTest {
     @Test
     public void test_method() {
@@ -30,6 +33,18 @@ public class FunTest {
         };
 
         Fun fun = new Fun();
-        System.out.println(Fun.staticFunc(1));
+        assertThat(Fun.staticFunc(1), is("mock static"));
+        assertThat(fun.callPrivateFunc(10), is("mock private is called"));
+        assertThat(fun.finalFunc(10), is("mock final"));
+        assertThat(fun.publicFunc(10), is("mock public "));
+    }
+
+    @Test
+    public void test_method2() {
+        Fun fun = new Fun();
+        assertThat(Fun.staticFunc(1), is("mock static"));
+        assertThat(fun.callPrivateFunc(10), is("mock private is called"));
+        assertThat(fun.finalFunc(10), is("mock final"));
+        assertThat(fun.publicFunc(10), is("mock public "));
     }
 }
