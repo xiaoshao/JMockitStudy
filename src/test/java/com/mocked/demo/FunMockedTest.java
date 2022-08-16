@@ -1,6 +1,5 @@
 package com.mocked.demo;
 
-import com.mockup.demo.Fun;
 import mockit.Expectations;
 import mockit.Mocked;
 import mockit.Verifications;
@@ -18,7 +17,7 @@ public class FunMockedTest {
     FunMocked funMocked;
 
     @Test
-    public void test_mocked() {
+    public void should_mocked_with_expectation() {
        new Expectations(){
            {
                funMocked.sayHello();
@@ -37,7 +36,18 @@ public class FunMockedTest {
     }
 
     @Test
-    public void test_mocked_in_p(@Mocked FunMocked funMocked) {
+    public void should_mocked_with_origin() {
+        String result = funMocked.sayHello();
+
+        assertNull(result);
+
+        new Verifications(){{
+            funMocked.sayHello();
+            times = 1;
+        }};
+    }
+    @Test
+    public void should_mocked_in_param(@Mocked FunMocked funMocked) {
         new Expectations(){{
            funMocked.sayHello();
            result = "say hello parameter";
